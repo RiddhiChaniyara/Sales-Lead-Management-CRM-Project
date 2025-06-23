@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+    <title>ERP Development Services</title>
+    <meta name="description" content="Professional ERP development services to streamline your business processes. From design to deployment, we offer comprehensive solutions for your enterprise resource planning needs.">
+    <meta name="keywords" content="ERP development, enterprise resource planning, business solutions, ERP software, custom ERP development">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .section-padding {
+            padding: 80px 0;
+        }
+        .feature-image {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+
+<body>
+    
+    <main class="container section-padding">
+        <section class="row align-items-center mb-5">
+            <div class="col-md-6">    
+                <img src="{% static 'assets/img/ERP.webp' %}" alt="ERP Design" class="feature-image rounded shadow">
+            </div>
+            <div class="col-md-6">
+                <h2 class="mb-4">ERP Design</h2>
+                <p>Our team of expert designers will create a user-friendly and efficient interface for your ERP system. We focus on delivering a seamless user experience that enhances productivity and efficiency.</p>
+            </div>
+        </section>
+        <section class="row align-items-center mb-5">
+            <div class="col-md-6 order-md-2">
+                <img src="{% static 'assets/img/ERP_Development.webp' %}" alt="ERP Development" class="feature-image rounded shadow">
+            </div>
+            <div class="col-md-6 order-md-1">
+                <h2 class="mb-4">ERP Development</h2>
+                <p>Our developers are skilled in the latest ERP technologies and frameworks. We build high-performance, scalable, and secure ERP systems tailored to your business needs.</p>
+            </div>
+        </section>
+        <section class="row align-items-center">
+            <div class="col-md-6">     
+                <img src="{% static 'assets/img/ERP_Maintenance.png' %}" class="feature-image rounded shadow">
+            </div>
+            <div class="col-md-6">
+                <h2 class="mb-4">ERP Maintenance</h2>
+                <p>We offer ongoing maintenance and support to ensure your ERP system remains up-to-date and performs optimally. Our services include bug fixes, updates, and feature enhancements.</p>
+            </div>
+        </section>
+       </section>
+         <div class="text-center mt-5">
+    <a class="btn btn-primary btn-lg" href="{% url 'services' %}">
+     Go Back To Home
+    </a>
+   </div>
+    </main>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
+{% endblock %}

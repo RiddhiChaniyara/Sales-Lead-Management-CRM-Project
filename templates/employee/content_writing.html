@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+  <title>
+   Content Writing Services
+  </title>
+  <meta content="Professional content writing services to enhance your brand's online presence. From blog posts to web content, we offer comprehensive solutions for your content needs." name="description"/>
+  <meta content="content writing, blog writing, web content, professional writing, content creation" name="keywords"/>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .section-padding {
+            padding: 80px 0;
+        }
+        .feature-image {
+            max-width: 100%;
+            height: auto;
+        }
+  </style>
+ <body>
+                                                                       
+  <main class="container section-padding">
+   <section class="row align-items-center mb-5">
+    <div class="col-md-6">                                                        
+     <img alt="Blog Writing" class="feature-image rounded shadow" height="600" src="{% static 'assets/img/Blog_Writing.jpg' %}" width="600"/>
+    </div>
+    <div class="col-md-6">
+     <h2 class="mb-4">
+      Blog Writing
+     </h2>
+     <p>
+      Our team of expert writers will create engaging and informative blog posts that resonate with your audience. We focus on delivering high-quality content that drives traffic and boosts your online presence.
+     </p>
+    </div>
+   </section>
+   <section class="row align-items-center mb-5">
+    <div class="col-md-6 order-md-2">
+     <img alt="Web Content" class="feature-image rounded shadow" height="600" src="{% static 'assets/img/Web_content.jpg' %}" width="600"/>
+    </div>
+    <div class="col-md-6 order-md-1">
+     <h2 class="mb-4">
+      Web Content
+     </h2>
+     <p>
+      We provide professional web content writing services to ensure your website is informative, engaging, and optimized for search engines. Our content is tailored to meet your business goals and target audience.
+     </p>
+    </div>
+   </section>
+   <section class="row align-items-center">
+    <div class="col-md-6">
+     <img alt="SEO Content" class="feature-image rounded shadow" height="600" src="{% static 'assets/img/Seo_Content.jpg' %}" width="600"/>
+    </div>
+    <div class="col-md-6">
+     <h2 class="mb-4">
+      SEO Content
+     </h2>
+     <p>
+      Our SEO content writing services are designed to improve your website's search engine rankings. We create keyword-rich content that is both informative and engaging, helping you attract more organic traffic.
+     </p>
+    </div>
+   </section>
+  <div class="text-center mt-5">
+    <a class="btn btn-primary btn-lg" href="{% url 'services' %}">
+     Go Back To Home
+    </a>
+   </div>
+  </main>
+  </main>
+  
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+  </script>
+{% endblock %}

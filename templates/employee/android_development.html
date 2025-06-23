@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+  <title>
+   Android Development Services
+  </title>
+  <meta content="Professional Android development services to bring your app ideas to life. From design to deployment, we offer comprehensive solutions for your mobile app needs." name="description"/>
+  <meta content="Android development, mobile app development, Android app design, Android app maintenance, mobile solutions" name="keywords"/>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .section-padding {
+            padding: 80px 0;
+        }
+        .feature-image {
+            max-width: 100%;
+            height: auto;
+        }
+  </style>
+
+  <main class="container section-padding">
+   <section class="row align-items-center mb-5">
+    <div class="col-md-6">
+     <img alt="Android App Design" class="feature-image rounded shadow" height="600" src="{% static 'assets/img/App_Design.jpg' %}" width="600"/>
+    </div>
+    <div class="col-md-6">
+     <h2 class="mb-4">
+      App Design
+     </h2>
+     <p>
+      Our team of expert designers will create a visually appealing and user-friendly interface for your Android app. We focus on delivering a seamless user experience that keeps your users engaged.
+     </p>
+    </div>
+   </section>
+   <section class="row align-items-center mb-5">
+    <div class="col-md-6 order-md-2">
+     <img alt="Android App Development" class="feature-image rounded shadow" height="600" src="{% static 'assets/img/App_Development.jpg' %}" width="600"/>
+    </div>
+    <div class="col-md-6 order-md-1">
+     <h2 class="mb-4">
+      App Development
+     </h2>
+     <p>
+      Our developers are skilled in the latest Android technologies and frameworks. We build high-performance, scalable, and secure Android apps tailored to your business needs.
+     </p>
+    </div>
+   </section>
+   <section class="row align-items-center">
+    <div class="col-md-6">
+     <img alt="Android App Maintenance" class="feature-image rounded shadow" height="600" src="{% static 'assets/img/App_Maintenance.jpg' %} " width="600"/>
+    </div>
+    <div class="col-md-6">
+     <h2 class="mb-4">
+      App Maintenance
+     </h2>
+     <p>
+      We offer ongoing maintenance and support to ensure your Android app remains up-to-date and performs optimally. Our services include bug fixes, updates, and feature enhancements.
+     </p>
+    </div>
+   </section>
+   <div class="text-center mt-5">
+    <a class="btn btn-primary btn-lg" href="{% url 'services' %}">
+     Go Back To Home
+    </a>
+   </div>
+  </main>
+  
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+  </script>
+  {% endblock %}

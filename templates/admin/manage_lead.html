@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">View The List Of Leads</h1>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <form method="GET" action="">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search by Name, Email, or City" name="q" value="{{ request.GET.q }}">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+        <div class="col-12 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <h4 class="card-title">View The List Of Leads</h4>
+                    <hr>
+
+                    {% include 'includes/messages.html' %}
+
+                    <!-- Responsive table -->
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>S no.</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Contact No</th>
+                                    <th>City</th>
+                                    <th>State</th>
+                                    <th>Source</th>
+                                    <th>Services</th>
+                                    <th>Assigned User</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for lead in leads %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ lead.name }}</td>
+                                    <td>{{ lead.email }}</td>
+                                    <td>{{ lead.contact_number }}</td>
+                                    <td>{{ lead.city }}</td>
+                                    <td>{{ lead.state }}</td>
+                                    <td>{{ lead.get_source_display }}</td>
+                                    <td>{{ lead.get_services_display }}</td>
+                                    <td>
+                                        {% if lead.assigned_user %}
+                                            {{ lead.assigned_user.admin.first_name }} {{ lead.assigned_user.admin.last_name }}
+                                        {% else %}
+                                            Not Assigned
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <p>
+                                            <a href="{% url 'edit_lead' lead.id %}" class="btn btn-primary btn-sm">Edit Lead</a>
+                                            <a href="{% url 'delete_lead' lead.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Do you really want to delete');">Delete</a>
+                                        </p>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="10" class="text-center">No leads found.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination" style="padding-top: 10px; text-align: center;">
+                        <span class="step-links">
+                            {% if leads.has_previous %}
+                                <a href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&laquo; first</a>
+                                <a href="?page={{ leads.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+                            {% endif %}
+
+                            <span class="current">
+                                Page {{ leads.number }} of {{ leads.paginator.num_pages }}.
+                            </span>
+
+                            {% if leads.has_next %}
+                                <a href="?page={{ leads.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
+                                <a href="?page={{ leads.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">last &raquo;</a>
+                            {% endif %}
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+<div class="container py-8 mx-auto max-w-3xl">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-light text-gray-800">
+            {% if edit_mode %}Edit Leave Request{% else %}New Leave Request{% endif %}
+        </h2>
+        <a href="{% url 'employee_leave_request_list' %}" class="flex items-center gap-2 text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors">
+            <i class="fas fa-arrow-left"></i> Back
+        </a>
+    </div>
+
+    <form method="post" class="grid gap-6 bg-white p-6 rounded-lg shadow-md ring-1 ring-gray-200">
+        {% csrf_token %}
+        <div>
+            <label for="{{ form.leave_reason.id_for_label }}" class="block text-sm font-medium text-gray-600 mb-1">
+                Reason <span class="text-red-500">*</span>
+            </label>
+            <select id="{{ form.leave_reason.id_for_label }}" name="{{ form.leave_reason.name }}" required 
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                <option value="" disabled {% if not form.leave_reason.value %}selected{% endif %}>Select a reason</option>
+                <option value="personal" {% if form.leave_reason.value == "personal" %}selected{% endif %}>Personal</option>
+                <option value="medical" {% if form.leave_reason.value == "medical" %}selected{% endif %}>Medical</option>
+                <option value="other" {% if form.leave_reason.value == "other" %}selected{% endif %}>Other</option>
+            </select>
+            {% if form.leave_reason.errors %}
+                <div class="text-red-600 text-xs mt-1">{{ form.leave_reason.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label for="{{ form.from_date.id_for_label }}" class="block text-sm font-medium text-gray-600 mb-1">
+                    From Date <span class="text-red-500">*</span>
+                </label>
+                <input type="date" id="{{ form.from_date.id_for_label }}" name="{{ form.from_date.name }}" required 
+                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                       value="{{ form.from_date.value|date:'Y-m-d' }}">
+                {% if form.from_date.errors %}
+                    <div class="text-red-600 text-xs mt-1">{{ form.from_date.errors }}</div>
+                {% endif %}
+            </div>
+            <div>
+                <label for="{{ form.from_time.id_for_label }}" class="block text-sm font-medium text-gray-600 mb-1">
+                    Time <span class="text-red-500">*</span>
+                </label>
+                <input type="time" id="{{ form.from_time.id_for_label }}" name="{{ form.from_time.name }}" required 
+                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                       value="{{ form.from_time.value|time:'H:i' }}">
+                {% if form.from_time.errors %}
+                    <div class="text-red-600 text-xs mt-1">{{ form.from_time.errors }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label for="{{ form.to_date.id_for_label }}" class="block text-sm font-medium text-gray-600 mb-1">
+                    To Date <span class="text-red-500">*</span>
+                </label>
+                <input type="date" id="{{ form.to_date.id_for_label }}" name="{{ form.to_date.name }}" required 
+                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                       value="{{ form.to_date.value|date:'Y-m-d' }}">
+                {% if form.to_date.errors %}
+                    <div class="text-red-600 text-xs mt-1">{{ form.to_date.errors }}</div>
+                {% endif %}
+            </div>
+            <div>
+                <label for="{{ form.to_time.id_for_label }}" class="block text-sm font-medium text-gray-600 mb-1">
+                    Time <span class="text-red-500">*</span>
+                </label>
+                <input type="time" id="{{ form.to_time.id_for_label }}" name="{{ form.to_time.name }}" required 
+                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                       value="{{ form.to_time.value|time:'H:i' }}">
+                {% if form.to_time.errors %}
+                    <div class="text-red-600 text-xs mt-1">{{ form.to_time.errors }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div>
+            <label for="{{ form.place_visit.id_for_label }}" class="block text-sm font-medium text-gray-600 mb-1">
+                Destination <span class="text-red-500">*</span>
+            </label>
+            <input type="text" id="{{ form.place_visit.id_for_label }}" name="{{ form.place_visit.name }}" required 
+                   placeholder="Where are you going?" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                   value="{{ form.place_visit.value }}">
+            {% if form.place_visit.errors %}
+                <div class="text-red-600 text-xs mt-1">{{ form.place_visit.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div>
+            <label for="{{ form.remarks.id_for_label }}" class="block text-sm font-medium text-gray-600 mb-1">
+                Notes <span class="text-gray-400">(Optional)</span>
+            </label>
+            <textarea id="{{ form.remarks.id_for_label }}" name="{{ form.remarks.name }}" rows="2" 
+                      placeholder="Any additional details..." class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                      >{{ form.remarks.value|default_if_none:'' }}</textarea>
+            {% if form.remarks.errors %}
+                <div class="text-red-600 text-xs mt-1">{{ form.remarks.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="flex items-center gap-2">
+            <input type="checkbox" id="{{ form.agree.id_for_label }}" name="{{ form.agree.name }}" required 
+                   class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                   {% if form.agree.value %}checked{% endif %}>
+            <label for="{{ form.agree.id_for_label }}" class="text-sm text-gray-600">
+                I agree to follow Company rules and regulations
+            </label>
+            {% if form.agree.errors %}
+                <div class="text-red-600 text-xs mt-1">{{ form.agree.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="flex gap-4">
+            <button type="submit" class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-all shadow hover:shadow-md">
+                <i class="fas fa-save"></i> Submit
+            </button>
+            <button type="reset" class="flex items-center gap-2 px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-all shadow hover:shadow-md">
+                <i class="fas fa-eraser"></i> Reset
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">View The List Of Employees</h1>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <form method="GET" action="">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search by Name or Email" name="q" value="{{ request.GET.q }}">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+
+        <div class="col-12 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <h4 class="card-title">View The List Of Employees</h4>
+                    <hr>
+                    {% include 'includes/messages.html' %}
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>S no.</th>
+                                    <th>Emp Code</th>
+                                    <th>Emp First Name</th>
+                                    <th>Emp Last Name</th>
+                                    <th>Emp Email</th>
+                                    <th>Emp Contact no</th>
+                                    <th>Emp Joining Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in emplist %}
+                                <tr>
+                                    <td>{{ i.id }}</td>
+                                    <td>{{i.empcode}}</td>
+                                    <td>{{i.admin.first_name}}</td>
+                                    <td>{{i.admin.last_name}}</td>
+                                    <td>{{i.admin.email}}</td>
+                                    <td>{{i.mobilenumber}}</td>
+                                    <td>{{i.regdate_at}}</td>
+                                    <td>
+                                        <p>
+                                            <a href="{% url 'view_emp_profile' i.id %}" class="btn btn-primary btn-sm">Edit Profile</a>
+                                            <a href="{% url 'view_emp_education' i.admin.id %}" class="btn btn-warning btn-sm">Edit Education</a>
+                                        </p>
+                                        <p>
+                                            <a href="{% url 'view_emp_experience' i.admin.id %}" class="btn btn-info btn-sm">Edit Experience</a>
+                                            <a href="{% url 'delete_employee_details' i.admin.id %}" style="color:#fff" class="btn btn-danger btn-sm" onclick="return confirm('Do you really want to delete');">Delete</a>
+                                        </p>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="8" class="text-center">No employees found.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination" style="padding-top: 10px;text-align: center;">
+                        <span class="step-links">
+                            {% if emplist.has_previous %}
+                            <a href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&laquo; first</a>
+                            <a href="?page={{ emplist.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+                            {% endif %}
+                            <span class="current">
+                                Page {{ emplist.number }} of {{ emplist.paginator.num_pages }}.
+                            </span>
+                            {% if emplist.has_next %}
+                            <a href="?page={{ emplist.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
+                            <a href="?page={{ emplist.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">last &raquo;</a>
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,165 @@
+{% load static %}
+{% if user.user_type == '1' %}
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+     <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+        <img src="{% static 'assets/img/CRM logo.jpg' %}" alt="CRM Logo" class="sidebar-brand-icon rotate-n-8" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+        <div class="sidebar-brand-text mx-3">CRM Admin </div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'dashboard' %}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'all_employees' %}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>All Employees</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'admin_leave_request_list' %}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Employee Leave List</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'attendance_record' %}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Attendance Records</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'manage_lead' %}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Manage Leads</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'add_lead' %}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Add Leads</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'lead_status' %}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Leads Status</span></a>
+    </li>
+   
+    
+
+  
+
+</ul>
+
+{% else  %}
+
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+        <img src="{% static 'assets/img/CRM logo.jpg' %}" alt="CRM Logo" class="sidebar-brand-icon rotate-n-8" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+        <div class="sidebar-brand-text mx-3">CRM Employee </div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'dashboard' %}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Employees Panel
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <style>
+        /* Add spacing between dropdown items */
+        .dropdown-item {
+            padding: 10px 15px; /* Adjust top-bottom spacing */
+        }
+    </style>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="attendanceDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-fw fa-user-check"></i>
+            <span>Attendance</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="attendanceDropdown">
+            <a class="dropdown-item" href="{% url 'register_face' %}">
+                <i class="fas fa-fw fa-camera"></i> Register Face
+            </a>
+            <a class="dropdown-item" href="{% url 'mark_attendance' %}">
+                <i class="fas fa-fw fa-clipboard-list"></i> Mark Attendance
+            </a>
+        </div>
+    </li>
+    
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="educationDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-fw fa-graduation-cap"></i>
+            <span>Education</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="educationDropdown">
+            <a class="dropdown-item" href="{% url 'emp_education' %}">
+                <i class="fas fa-fw fa-plus-circle"></i> Add Education
+            </a>
+            <a class="dropdown-item" href="{% url 'emp_education_view' %}">
+                <i class="fas fa-fw fa-edit"></i> Edit Education
+            </a>
+        </div>
+    </li>
+    
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="experienceDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-fw fa-briefcase"></i>
+            <span>Experience</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="experienceDropdown">
+            <a class="dropdown-item" href="{% url 'emp_exp' %}">
+                <i class="fas fa-fw fa-plus-circle"></i> Add Experiences
+            </a>
+            <a class="dropdown-item" href="{% url 'emp_experience_view' %}">
+                <i class="fas fa-fw fa-edit"></i> Edit Experiences
+            </a>
+        </div>
+    </li>
+    
+   
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'employee_leave_request_list' %}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Leave</span></a>
+    </li>
+    
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'today_leads' %}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Today Leads</span></a>
+    </li>
+    <li class="nav-item"> 
+        <a class="nav-link" href="{% url 'services' %}"> 
+            <i class="fas fa-fw fa-table"></i> 
+            <span>Our Services</span> </a> 
+    </li>
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+    <!-- Sidebar Message -->
+</ul>
+{% endif %}

@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Update Your Education Details</h1>
+     
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+
+        <!-- Earnings (Monthly) Card Example -->
+       
+
+      
+
+        <!-- Pending Requests Card Example -->
+        <div class="col-xl-12 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <h4 class="card-title">Update Your Education Details</h4>
+         <hr>
+        
+         
+
+            
+
+<form class="user" method="post" action="{% url 'update_emp_education' %}">
+  {% include 'includes/messages.html' %}
+  {% csrf_token %}
+ 
+  <div class="row">
+   <div class="col-4 mb-3">Course Post Graduation</div>
+      <div class="col-8 mb-3">   
+        <input type="text" class="form-control form-control-user" id="CoursePG" name="CoursePG" aria-describedby="emailHelp" value="{{emp_edu.CoursePG}}"></div>
+        <input type="hidden" class="form-control form-control-user" id="employee_id" name="employee_id" aria-describedby="emailHelp" value="{{emp_edu.empid.id}}">
+       </div> 
+     
+
+       <div class="row">
+         <div class="col-4 mb-3">School/College Post Graduation </div>
+        <div class="col-8 mb-3">  <input type="text" class="form-control form-control-user" id="SchoolCollegePG" name="SchoolCollegePG" aria-describedby="emailHelp" value="{{emp_edu.SchoolCollegePG}}"></div>  
+        </div>
+
+
+
+       <div class="row">
+       <div class="col-4 mb-3">Year of Passing Post Graduation </div>
+       <div class="col-8 mb-3">
+         <input type="text" class="form-control form-control-user" id="YearPassingPG" name="YearPassingPG" aria-describedby="emailHelp" value="{{emp_edu.YearPassingPG}}"></div>
+       </div>
+
+       <div class="row">
+         <div class="col-4 mb-3">Percentage in PG</div>
+        <div class="col-8 mb-3">
+         <input type="text" class="form-control form-control-user" id="PercentagePG" name="PercentagePG" aria-describedby="emailHelp" value="{{emp_edu.PercentagePG}}">
+       </div></div>
+       <div class="row">
+   <div class="col-4 mb-3">Course Graduation</div>
+      <div class="col-8 mb-3">   <input type="text" class="form-control form-control-user" id="CourseGra" name="CourseGra" aria-describedby="emailHelp" value="{{emp_edu.CourseGra}}" required="true"></div>
+       </div>  
+       <div class="row">
+         <div class="col-4 mb-3">School/College Graduation </div>
+        <div class="col-8 mb-3">  <input type="text" class="form-control form-control-user" id="SchoolCollegeGra" name="SchoolCollegeGra" aria-describedby="emailHelp" value="{{emp_edu.SchoolCollegeGra}}" required="true"></div>  
+        </div>
+
+
+
+       <div class="row">
+       <div class="col-4 mb-3">Year of Passing Graduation </div>
+       <div class="col-8 mb-3">
+         <input type="text" class="form-control form-control-user" id="YearPassingGra" name="YearPassingGra" aria-describedby="emailHelp" value="{{emp_edu.YearPassingGra}}" required="true"></div>
+       </div>
+
+       <div class="row">
+         <div class="col-4 mb-3">Percentage in Graduation</div>
+        <div class="col-8 mb-3">
+         <input type="text" class="form-control form-control-user" id="PercentageGra" name="PercentageGra" aria-describedby="emailHelp" value="{{emp_edu.PercentageGra}}" required="true">
+       </div></div>
+       <div class="row">
+   <div class="col-4 mb-3">Course SSC</div>
+      <div class="col-8 mb-3">   <input type="text" class="form-control form-control-user" id="CourseSSC" name="CourseSSC" aria-describedby="emailHelp" value="{{emp_edu.CourseSSC}}" required="true"></div>
+       </div>  
+       <div class="row">
+         <div class="col-4 mb-3">School/College SSC </div>
+        <div class="col-8 mb-3">  <input type="text" class="form-control form-control-user" id="SchoolCollegeSSC" name="SchoolCollegeSSC" aria-describedby="emailHelp" value="{{emp_edu.SchoolCollegeSSC}}" required="true"></div>  
+        </div>
+
+
+
+       <div class="row">
+       <div class="col-4 mb-3">Year of Passing SSC </div>
+       <div class="col-8 mb-3">
+         <input type="text" class="form-control form-control-user" id="YearPassingSSC" name="YearPassingSSC" aria-describedby="emailHelp" value="{{emp_edu.YearPassingSSC}}" required="true"></div>
+       </div>
+
+       <div class="row">
+         <div class="col-4 mb-3">Percentage in SSC</div>
+        <div class="col-8 mb-3">
+         <input type="text" class="form-control form-control-user" id="PercentageSSC" name="PercentageSSC" aria-describedby="emailHelp" value="{{emp_edu.PercentageSSC}}" required="true">
+       </div></div>
+       <div class="row">
+   <div class="col-4 mb-3">Course HSC</div>
+      <div class="col-8 mb-3">   <input type="text" class="form-control form-control-user" id="CourseHSC" name="CourseHSC" aria-describedby="emailHelp" value="{{emp_edu.CourseHSC}}" required="true"></div>
+       </div>  
+       <div class="row">
+         <div class="col-4 mb-3">School/College HSC </div>
+        <div class="col-8 mb-3">  <input type="text" class="form-control form-control-user" id="SchoolCollegeHSC" name="SchoolCollegeHSC" aria-describedby="emailHelp" value="{{emp_edu.SchoolCollegeHSC}}" required="true"></div>  
+        </div>
+
+
+
+       <div class="row">
+       <div class="col-4 mb-3">Year of Passing HSC </div>
+       <div class="col-8 mb-3">
+         <input type="text" class="form-control form-control-user" id="YearPassingHSC" name="YearPassingHSC" aria-describedby="emailHelp" value="{{emp_edu.YearPassingHSC}}" required="true"></div>
+       </div>
+
+       <div class="row">
+         <div class="col-4 mb-3">Percentage in HSC</div>
+        <div class="col-8 mb-3">
+         <input type="text" class="form-control form-control-user" id="PercentageHSC" name="PercentageHSC" aria-describedby="emailHelp" value="{{emp_edu.PercentageHSC}}" required="true">
+       </div></div>
+      
+       <div class="row" style="margin-top:4%">
+         <div class="col-4"></div>
+         <div class="col-4">
+         <input type="submit" name="submit"  value="submit" class="btn btn-primary btn-user btn-block">
+       </div>
+       </div>
+     
+     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Row -->
+
+    
+    
+
+</div>
+{% endblock %}

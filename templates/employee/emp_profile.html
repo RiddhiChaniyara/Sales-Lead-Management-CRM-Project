@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Employee Profile</h1>
+       
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+
+        <!-- Earnings (Monthly) Card Example -->
+       
+
+      
+
+        <!-- Pending Requests Card Example -->
+        <div class="col-xl-12 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <h4 class="card-title">Employee Profile</h4>
+         <hr>
+         <form class="forms-sample" method="POST" action="{% url 'emp_profile_update' %}" enctype="multipart/form-data">
+            {% include 'includes/messages.html' %}
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="exampleInputUsername1">Old Image</label>
+                
+                <img src="/{{emp.admin.profile_pic}}" width="50" height="50">
+              </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1">Profile Pic</label>
+              <input type="file" class="form-control" name="profile_pic">
+            
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">First Name</label>
+              <input type="text" class="form-control" name="first_name" value="{{emp.admin.first_name}}">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Last Name</label>
+              <input type="text" class="form-control" name="last_name" value="{{emp.admin.last_name}}">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Mobile Number</label>
+                <input type="text" class="form-control" name="mobilenumber" value="{{emp.mobilenumber}}">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Employee Code</label>
+                <input type="text" class="form-control" name="empcode" value="{{emp.empcode}}">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Department</label>
+                <input type="text" class="form-control" name="empdept" value="{{emp.empdept}}">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Joing Date</label>
+                <input type="date" class="form-control" name="joiningdate" value="{{emp.joiningdate}}">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Gender</label>
+                <select class="form-control" name="gender">
+                    <option value="{{emp.gender}}">{{emp.gender}}</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+              
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Address</label>
+                <textarea class="form-control" name="address" cols="4" rows="6">{{emp.address}}
+                 
+                </textarea>
+              
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Desigantion</label>
+                <input type="text" class="form-control" name="empdesignation" value="{{emp.empdesignation}}">
+              </div>
+            <div class="form-group">
+              <label for="exampleInputConfirmPassword1">Email</label>
+              <input type="email" class="form-control" readonly="True" name="email" value="{{emp.admin.email}}">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputConfirmPassword1">Username</label>
+                <input type="text" class="form-control" readonly="True" name="username" value="{{emp.admin.username}}">
+              </div>
+           
+            <button type="submit" class="btn btn-primary mr-2">Update</button>
+            <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancel</a>
+            
+          </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Row -->
+
+    
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,336 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% if user.user_type == '1' %}
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">{{user.first_name}} {{user.last_name}} Dashboard</h1>
+        <a href="{% url 'admin_profile' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                class="fas fa-download fa-sm text-white-50"></i> View Profile</a>
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+
+   
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-12 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <h1 class="h3 mb-0 text-gray-800">
+                                Total Registered Employees<h1>
+                                    <div class="h3 mb-0 font-weight-bold text-gray-800">{{emp_count}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="col-auto">
+                                <a href="{% url 'all_employees' %}"><i class="fas fa-users fa-2x text-gray-300"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-12 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <h1 class="h3 mb-0 text-gray-800">Total Leads</h1>
+                            <div class="h3 mb-0 font-weight-bold text-gray-800">{{ lead_count }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="col-auto">
+                                <a href="{% url 'manage_lead' %}"><i class="fas fa-user-friends fa-2x text-gray-300"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+         <!-- Connected Leads Card -->
+         <div class="col-xl-12 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <h1 class="h3 mb-0 text-gray-800">
+                                Connected Leads<h1>
+                                    <div class="h3 mb-0 font-weight-bold text-gray-800">{{ connected_leads }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <a href="{% url 'manage_lead' %}"><i class="fas fa-phone fa-2x text-gray-300"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       <!-- Follow Up Leads Card -->
+<div class="col-xl-12 col-md-6 mb-4">
+    <div class="card border-left-warning shadow h-100 py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                    <h1 class="h3 mb-0 text-gray-800">
+                        Follow Up Leads
+                    </h1>
+                    <div class="h3 mb-0 font-weight-bold text-gray-800">{{ follow_up_leads }}</div>
+                </div>
+                <div class="col-auto">
+                    <a href="{% url 'manage_lead' %}"><i class="fas fa-calendar fa-2x text-gray-300"></i></a>   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Not Connected Leads Card -->
+<div class="col-xl-12 col-md-6 mb-4">
+    <div class="card border-left-danger shadow h-100 py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                    <h1 class="h3 mb-0 text-gray-800">
+                        Not Connected Leads
+                    </h1>
+                    <div class="h3 mb-0 font-weight-bold text-gray-800">
+                        {{ not_connected_leads|default:"0" }}
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <a href="{% url 'lead_status' %}" title="Manage Leads">
+                        <i class="fas fa-phone-slash fa-2x text-gray-300"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Attendance Records Card -->
+    <div class="col-xl-12 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <h1 class="h3 mb-0 text-gray-800">Daily Attendance Records {{ "now"|date:"Y-m-d" }}</h1>
+                        <div class="h3 mb-0 font-weight-bold text-gray-800">{{ attendance_count }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <a href="{% url 'attendance_record' %}" title="View Attendance Records">
+                            <i class="fas fa-clock fa-2x text-gray-300"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Content Row -->
+</div>
+{% else %}
+
+<!-- employee side -->
+<div class="container-fluid">
+    <!-- Content Row -->
+    <div class="row">
+        <!-- Welcome Card -->
+        <div class="col-12 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col">
+                            <h1 class="h3 mb-0 text-gray-800">Welcome Back To CRM!! {{user.first_name}} {{user.last_name}}</h1>
+                            <br>
+                            <a href="{% url 'emp_profile' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                <i class="fas fa-download fa-sm text-white-50"></i> View Profile
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Total Leads Card -->
+        <div class="col-xl-12 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Total Leads
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ lead_count }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <a href="{% url 'today_leads' %}" title="total leads">
+                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Pending Leads Card -->
+        <div class="col-xl-12 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                Pending Leads
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ pending_leads_count }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <a href="{% url 'today_leads' %}" title="Pending Leads">
+                                <i class="fas fa-hourglass-half fa-2x text-gray-300"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- To-Do List Card -->
+       <!-- In your template within the employee section -->
+        <div class="col-12 mb-4">
+            <div class="card shadow h-100 py-2">
+                <div class="card-header">
+                    <h4 class="text-gray-800 mb-0">Your To-Do List</h4>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered" id="todo-table">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="width: 30%;">Date</th>
+                                <th class="text-center" style="width: 30%;">Time</th>
+                                <th style="width: 30%;">To-Do</th>
+                                <th class="text-center" style="width: 10%;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in todo_items %}
+                            <tr>
+                                <td class="text-center">{{ item.created_at|date:"Y-m-d" }}</td>
+                                <td class="text-center">{{ item.created_at|time:"H:i" }}</td>
+                                <td>{{ item.task }}</td>
+                                <td class="text-center">
+                                    <button class="btn btn-sm btn-danger delete-task" data-id="{{ item.id }}">Delete</button>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="4">No tasks yet</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="input-group mt-3">
+                        <input type="text" class="form-control" id="new-task-input" placeholder="Add a new task...">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" id="add-task-btn">Add Task</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('add-task-btn').addEventListener('click', function() {
+        const taskInput = document.getElementById('new-task-input');
+        const taskText = taskInput.value.trim();
+    
+        if (taskText !== '') {
+            fetch("{% url 'add_todo' %}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: 'task=' + encodeURIComponent(taskText)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const todoTable = document.getElementById('todo-table').getElementsByTagName('tbody')[0];
+                    // Use the server's created_at timestamp
+                    const createdAt = new Date(data.created_at);
+                    const date = createdAt.toISOString().split('T')[0];
+                    const time = createdAt.toTimeString().split(' ')[0].slice(0, 5);
+    
+                    const newRow = document.createElement('tr');
+                    newRow.innerHTML = `
+                        <td class="text-center">${date}</td>
+                        <td class="text-center">${time}</td>
+                        <td>${data.task}</td>
+                        <td class="text-center">
+                            <button class="btn btn-sm btn-danger delete-task" data-id="${data.id}">Delete</button>
+                        </td>
+                    `;
+                    // Remove "No tasks yet" row if it exists
+                    if (todoTable.firstChild && todoTable.firstChild.textContent.includes('No tasks yet')) {
+                        todoTable.removeChild(todoTable.firstChild);
+                    }
+                    todoTable.insertBefore(newRow, todoTable.firstChild);
+                    taskInput.value = '';
+                } else {
+                    alert('Failed to add task: ' + (data.error || 'Unknown error'));
+                }
+            })
+            .catch(error => {
+                console.error('Error adding task:', error);
+                alert('An error occurred while adding the task.');
+            });
+        }
+    });
+
+    document.addEventListener('click', function(event) {
+    if (event.target.classList.contains('delete-task')) {
+        const taskId = event.target.getAttribute('data-id');
+        const taskRow = event.target.closest('tr');
+
+        fetch("{% url 'delete_todo' %}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: 'id=' + encodeURIComponent(taskId)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                taskRow.remove();
+                // If no tasks remain, show "No tasks yet"
+                const todoTable = document.getElementById('todo-table').getElementsByTagName('tbody')[0];
+                if (todoTable.children.length === 0) {
+                    const emptyRow = document.createElement('tr');
+                    emptyRow.innerHTML = '<td colspan="4">No tasks yet</td>';
+                    todoTable.appendChild(emptyRow);
+                }
+            } else {
+                alert('Failed to delete task: ' + (data.error || 'Unknown error'));
+            }
+        })
+        .catch(error => {
+            console.error('Error deleting task:', error);
+            alert('An error occurred while deleting the task.');
+        });
+    }
+});
+</script>
+{% endif %}
+{% endblock %}

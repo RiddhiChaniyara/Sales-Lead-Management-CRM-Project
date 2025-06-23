@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+
+<div class="flex justify-center items-center h-full">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-[36rem]">
+        <h2 class="text-center text-xl font-bold mb-4">Register Your Face</h2>
+        <div class="w-full h-72 mb-4 rounded overflow-hidden">
+            <video id="video" class="w-full h-full object-cover transform scale-x-[-1]" autoplay></video>
+        </div>
+        <button id="capture" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">Register</button>
+        <a href="{% url 'dashboard' %}" class="w-full mt-4 bg-gray-500 text-white py-2 rounded hover:bg-gray-600 text-center block">Go Back to Dashboard</a>
+    </div>
+</div>
+
+<script>
+    const video = document.getElementById('video');
+    const captureButton = document.getElementById('capture');
+
+    // Access the user's camera
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+            video.srcObject = stream;
+            video.play();
+        }).catch(function(err) {
+            console.error("Error accessing camera: ", err);
+        });
+    }
+
+    // Capture image and send to server
+    captureButton.addEventListener('click', function() {
+        const canvas = document.createElement('canvas');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        canvas.getContext('2d').drawImage(video, 0, 0);
+        const imageData = canvas.toDataURL('image/png');
+
+        fetch('/register_face/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: 'image=' + encodeURIComponent(imageData)
+        }).then(response => response.json()).then(data => {
+            if (data.success) {
+                alert("Your face registered successfully!");
+            } else {
+                alert(data.error || "Your face is not registered, try again.");
+            }
+        }).catch(err => {
+            console.error("Error: ", err);
+            alert("An error occurred. Please try again.");
+        });
+    });
+</script>
+{% endblock content %}

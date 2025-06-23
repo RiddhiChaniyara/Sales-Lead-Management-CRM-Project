@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Update Your Experiences Details</h1>
+    
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+
+        <!-- Earnings (Monthly) Card Example -->
+       
+
+      
+
+        <!-- Pending Requests Card Example -->
+        <div class="col-xl-12 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <h4 class="card-title">Update Your Experiences Details</h4>
+         <hr>
+        
+           
+            
+
+<form class="user" method="post" action="{% url 'update_emp_experience' %}">
+  {% include 'includes/messages.html' %}
+  {% csrf_token %}
+ 
+  <div class="row">
+    <div class="col-4 mb-3">Employer1 Name</div>
+       <div class="col-8 mb-3">   <input type="text" class="form-control form-control-user" id="Employer1Name" name="Employer1Name" aria-describedby="emailHelp" value="{{emp_exp.Employer1Name}}"></div>
+        </div>  
+        <div class="row">
+          <div class="col-4 mb-3">Employer1 Designation </div>
+         <div class="col-8 mb-3">  <input type="text" class="form-control form-control-user" id="Employer1Designation" name="Employer1Designation" aria-describedby="emailHelp" value="{{emp_exp.Employer1Designation}}"></div>  
+         </div>
+
+
+
+        <div class="row">
+        <div class="col-4 mb-3">Employer1 CTC </div>
+        <div class="col-8 mb-3">
+          <input type="hidden" class="form-control form-control-user" id="employee_id" name="employee_id" aria-describedby="emailHelp" value="{{emp_exp.empid.id}}">
+          <input type="text" class="form-control form-control-user" id="Employer1CTC" name="Employer1CTC" aria-describedby="emailHelp" value="{{emp_exp.Employer1CTC}}"></div>
+        </div>
+        
+             <div class="col-8 mb-3">   </div>
+              
+
+        <div class="row">
+          <div class="col-4 mb-3">Employer1 WorkDuration</div>
+         <div class="col-8 mb-3">
+          <input type="text" class="form-control form-control-user" id="Employer1WorkDuration" name="Employer1WorkDuration" aria-describedby="emailHelp" value="{{emp_exp.Employer1WorkDuration}}">
+        </div></div>
+        <div class="row">
+    <div class="col-4 mb-3">Employer2 Name</div>
+       <div class="col-8 mb-3">   <input type="text" class="form-control form-control-user" id="Employer2Name" name="Employer2Name" aria-describedby="emailHelp" value="{{emp_exp.Employer2Name}}"></div>
+        </div>  
+        <div class="row">
+          <div class="col-4 mb-3">Employer2 Designation </div>
+         <div class="col-8 mb-3">  <input type="text" class="form-control form-control-user" id="Employer2Designation" name="Employer2Designation" aria-describedby="emailHelp" value="{{emp_exp.Employer2Designation}}"></div>  
+         </div>
+
+
+
+        <div class="row">
+        <div class="col-4 mb-3">Employer2 CTC </div>
+        <div class="col-8 mb-3">
+          <input type="text" class="form-control form-control-user" id="Employer2CTC" name="Employer2CTC" aria-describedby="emailHelp" value="{{emp_exp.Employer2CTC}}"></div>
+        </div>
+
+        <div class="row">
+          <div class="col-4 mb-3">Employer2 WorkDuration</div>
+         <div class="col-8 mb-3">
+          <input type="text" class="form-control form-control-user" id="Employer2WorkDuration" name="Employer2WorkDuration" aria-describedby="emailHelp" value="{{emp_exp.Employer2WorkDuration}}">
+        </div></div>
+        <div class="row">
+    <div class="col-4 mb-3">Employer3 Name</div>
+       <div class="col-8 mb-3">   <input type="text" class="form-control form-control-user" id="Employer3Name" name="Employer3Name" aria-describedby="emailHelp" value="{{emp_exp.Employer3Name}}"></div>
+        </div>  
+        <div class="row">
+          <div class="col-4 mb-3">Employer3 Designation </div>
+         <div class="col-8 mb-3">  <input type="text" class="form-control form-control-user" id="Employer3Designation" name="Employer3Designation" aria-describedby="emailHelp" value="{{emp_exp.Employer3Designation}}"></div>  
+         </div>
+
+
+
+        <div class="row">
+        <div class="col-4 mb-3">Employer3 CTC </div>
+        <div class="col-8 mb-3">
+          <input type="text" class="form-control form-control-user" id="Employer3CTC" name="Employer3CTC" aria-describedby="emailHelp" value="{{emp_exp.Employer3CTC}}"></div>
+        </div>
+
+        <div class="row">
+          <div class="col-4 mb-3">Employer3 WorkDuration</div>
+         <div class="col-8 mb-3">
+          <input type="text" class="form-control form-control-user" id="Employer3WorkDuration" name="Employer3WorkDuration" aria-describedby="emailHelp" value="{{emp_exp.Employer3WorkDuration}}">
+        </div></div>
+
+        <div class="row" style="margin-top:4%">
+          <div class="col-4"></div>
+          <div class="col-4">
+          <input type="submit" name="submit"  value="submit" class="btn btn-primary btn-user btn-block">
+        </div>
+        </div>
+     
+     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Row -->
+
+    
+
+
+</div>
+{% endblock %}

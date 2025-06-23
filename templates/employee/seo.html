@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+ <html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   SEO Services
+  </title>
+  <meta content="Boost your online presence with our expert SEO services. Enhance your website's visibility, drive more traffic, and increase conversions with our tailored strategies." name="description"/>
+  <meta content="SEO services, digital marketing, search engine optimization, online visibility, website traffic" name="keywords"/>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body 
+        .section-padding {
+            padding: 80px 0;
+        }
+        .feature-image {
+            max-width: 100%;
+            height: auto;
+        }
+  </style>
+ </head>
+ <body>
+ 
+  <main class="container section-padding">
+   <section class="row align-items-center mb-5">
+    <div class="col-md-6">
+     <img alt="SEO Strategy Concept" class="feature-image rounded shadow" height="600" src="{% static 'assets/img/SEO_Keyword Optimization.jpg' %}" width="600"/>
+    </div>
+    <div class="col-md-6">
+     <h2 class="mb-4">
+      Keyword Optimization
+     </h2>
+     <p>
+      Our SEO experts will optimize your website with the right keywords to improve search engine rankings and drive targeted traffic. We ensure your content is relevant and engaging for your audience.
+     </p>
+    </div>
+   </section>
+   <section class="row align-items-center mb-5">
+    <div class="col-md-6 order-md-2">
+     <img alt="SEO Technical Optimization" class="feature-image rounded shadow" height="600" src="{% static 'assets/img/Technical SEO.jpg' %}" width="600"/>
+    </div>
+    <div class="col-md-6 order-md-1">
+     <h2 class="mb-4">
+      Technical SEO
+     </h2>
+     <p>
+      We focus on improving your website's technical aspects such as page speed, mobile responsiveness, and XML sitemaps to enhance search engine crawling and indexing.
+     </p>
+    </div>
+   </section>
+   <section class="row align-items-center">
+    <div class="col-md-6">
+     <img alt="SEO Analytics and Reporting" class="feature-image rounded shadow" height="600" src="{% static 'assets/img/SEO Analytics & Reporting.jpg' %}" width="600"/>
+    </div>
+    <div class="col-md-6">
+     <h2 class="mb-4">
+      SEO Analytics &amp; Reporting
+     </h2>
+     <p>
+      Stay informed about your SEO performance with our comprehensive analytics and reporting. We track key metrics to ensure your strategies are effective and aligned with your business goals.
+     </p>
+    </div>
+   </section>
+  <div class="text-center mt-5">
+    <a class="btn btn-primary btn-lg" href="{% url 'services' %}">
+     Go Back To Home
+    </a>
+   </div>
+  </main>
+  
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+  </script> 
+{% endblock %}

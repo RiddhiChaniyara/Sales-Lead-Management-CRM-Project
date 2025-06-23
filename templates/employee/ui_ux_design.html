@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+    <title>UI/UX Development Services</title>
+    <meta name="description" content="Professional UI/UX development services to create intuitive and engaging user experiences. From design to deployment, we offer comprehensive solutions for your user interface and user experience needs.">
+    <meta name="keywords" content="UI/UX development, user interface design, user experience design, UI design, UX design, web design">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .section-padding {
+            padding: 80px 0;
+        }
+        .feature-image {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+
+<body>
+    <main class="container section-padding">
+        <section class="row align-items-center mb-5">
+            <div class="col-md-6">     
+                <img src="{% static 'assets/img/UI_Design.png' %}" alt="UI Design" class="feature-image rounded shadow">
+            </div>
+            <div class="col-md-6">
+                <h2 class="mb-4">UI Design</h2>
+                <p>Our team of expert designers will create visually appealing and user-friendly interfaces for your applications. We focus on delivering a seamless user experience that keeps your users engaged.</p>
+            </div>
+        </section>
+        <section class="row align-items-center mb-5">
+            <div class="col-md-6 order-md-2">
+                <img src="{% static 'assets/img/UX_Design.jpg' %}" alt="UX Design" class="feature-image rounded shadow">
+            </div>
+            <div class="col-md-6 order-md-1">
+                <h2 class="mb-4">UX Design</h2>
+                <p>We provide comprehensive UX design services to ensure your applications are intuitive and easy to use. Our designers focus on creating user experiences that are both functional and enjoyable.</p>
+            </div>
+        </section>
+        <section class="row align-items-center">
+            <div class="col-md-6">
+                <img src="{% static 'assets/img/Prototyping & Testing.jpg' %}" alt="Prototyping & Testing" class="feature-image rounded shadow">
+            </div>
+            <div class="col-md-6">
+                <h2 class="mb-4">Prototyping & Testing</h2>
+                <p>We offer prototyping and testing services to validate your UI/UX designs. Our team uses the latest tools and techniques to create interactive prototypes and conduct user testing to ensure your designs meet user needs.</p>
+            </div>
+        </section>
+         <div class="text-center mt-5">
+    <a class="btn btn-primary btn-lg" href="{% url 'services' %}">
+     Go Back To Home
+    </a>
+   </div>
+    </main>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+ 
+{% endblock %}

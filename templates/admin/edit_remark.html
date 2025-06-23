@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="container mt-5">
+    <h2>Edit Remark</h2>
+    <form id="remarkForm" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="lead_name" class="form-label">Lead Name</label>
+            <input type="text" class="form-control" id="lead_name" name="lead_name" value="{{ remark.lead_name }}" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="lead_contact_number" class="form-label">Contact Number</label>
+            <input type="text" class="form-control" id="lead_contact_number" name="lead_contact_number" value="{{ remark.lead_contact_number }}" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="remark" class="form-label">Remark</label>
+            <textarea class="form-control" id="remark" name="remark" readonly>{{ remark.remark }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="call_status" class="form-label">Call Status</label>
+            <input type="text" class="form-control" id="call_status" name="call_status" value="{{ remark.get_call_connect_status_display }}" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="created_at" class="form-label">Created At</label>
+            <input type="text" class="form-control" id="created_at" name="created_at" value="{{ remark.created_at }}" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="employee" class="form-label">Assign User</label>
+            <select class="form-select form-control" id="employee" name="employee">
+                <option value="">Select Employee</option>
+                {% for employee in employees %}
+                    <option value="{{ employee.id }}" {% if remark.employee and remark.employee.id == employee.id %}selected{% endif %}>
+                        {% if employee.admin %}
+                            {{ employee.admin.first_name|default:"N/A" }} {{ employee.admin.last_name|default:"" }}
+                        {% else %}
+                            {{ employee.empcode }} (No User)
+                        {% endif %}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Update Remark</button>
+        <a href="{% url 'lead_status' %}" class="btn btn-secondary">Cancel</a>
+
+        <div id="successMessage" class="alert alert-success mt-3" style="display: none;">
+            Remark updated successfully!
+        </div>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function () {
+    $("#remarkForm").submit(function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        $.ajax({
+            url: "{% url 'edit_remark' remark.id %}",
+            type: "POST",
+            data: $(this).serialize(),
+            success: function (response) {
+                $("#successMessage").fadeIn().delay(2000).fadeOut(); // Show success message
+            },
+            error: function (xhr) {
+                alert("Error updating remark.");
+            }
+        });
+    });
+});
+</script>
+
+{% endblock content %}

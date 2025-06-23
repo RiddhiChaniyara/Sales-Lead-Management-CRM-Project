@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">View Lead Remarks</h1>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <form method="GET" action="">
+                <div class="input-group">
+                    <input type="text" class="form-control" 
+                           placeholder="Search by Lead Name, Employee, or Call Status" 
+                           name="q" value="{{ request.GET.q }}">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Messages -->
+    {% if messages %}
+    <div class="row mb-4">
+        <div class="col-12">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Content Row -->
+    <div class="row">
+        <div class="col-12 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <h4 class="card-title">Lead Remarks</h4>
+                    <hr>
+
+                    <!-- Responsive table -->
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>S no.</th>
+                                    <th>Lead Name</th>
+                                    <th>Contact Number</th>
+                                    <th>Employee</th>
+                                    <th>Remark</th>
+                                    <th>Call Status</th>
+                                    <th>Created At</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for remark in remarks %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ remark.lead_name }}</td>
+                                    <td>{{ remark.lead_contact_number }}</td>
+                                    <td>
+                                        {% if remark.employee %}
+                                            {{ remark.employee.admin.first_name }} {{ remark.employee.admin.last_name }}
+                                        {% else %}
+                                            Not Assigned
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ remark.remark }}</td>
+                                    <td>{{ remark.get_call_connect_status_display }}</td>
+                                    <td>{{ remark.created_at }}</td>
+                                    <td>
+                                        <p>
+                                            <a href="{% url 'edit_remark' remark.id %}" class="btn btn-primary btn-sm">Follow up</a>
+                                            <form action="{% url 'delete_remark' remark.id %}" method="POST" style="display:inline;">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you really want to delete?');">Delete</button>
+                                            </form>
+                                        </p>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="8" class="text-center">No lead remarks found.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination" style="padding-top: 10px;text-align: center;">
+                        <span class="step-links">
+                            {% if remarks.has_previous %}
+                                <a href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">« first</a>
+                                <a href="?page={{ remarks.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+                            {% endif %}
+
+                            <span class="current">
+                                Page {{ remarks.number }} of {{ remarks.paginator.num_pages }}.
+                            </span>
+
+                            {% if remarks.has_next %}
+                                <a href="?page={{ remarks.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
+                                <a href="?page={{ remarks.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">last »</a>
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

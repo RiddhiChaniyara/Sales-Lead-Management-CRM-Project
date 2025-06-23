@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Education Details</h1>
+       
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+
+        <!-- Earnings (Monthly) Card Example -->
+       
+        <p style="font-size:16px; color:red" align="center">Your Education details already added. Now you can only edit the record. </p>
+
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          
+        <tr>
+          <th>Post Graduate Course Name</th>
+          <td>{{emp_edu.CoursePG}}</td>
+        </tr>
+        <tr>
+          <th>Post Graduate School/College</th>
+          <td>{{emp_edu.SchoolCollegePG}}</td>
+        </tr>
+        <tr>
+          <th>Year of Passing in PG</th>
+          <td>{{emp_edu.YearPassingPG}}</td>
+        </tr>
+        <tr>
+          <th>Percent in PG</th>
+          <td>{{emp_edu.PercentagePG}}</td>
+        </tr>
+        <tr>
+          <th>Graduation Course Name</th>
+          <td>{{emp_edu.CourseGra}}</td>
+        </tr>
+        <tr>
+          <th>Graduate School/College</th>
+          <td>{{emp_edu.SchoolCollegeGra}}</td>
+        </tr>
+        <tr>
+          <th>Year of Passing in Graduation</th>
+          <td>{{emp_edu.YearPassingGra}}</td>
+        </tr>
+        <tr>
+          <th>Percent in Graduation</th>
+          <td>{{emp_edu.PercentageGra}}</td>
+        </tr>
+        <th>SSC Course Name</th>
+          <td>{{emp_edu.CourseSSC}}</td>
+        </tr>
+        <tr>
+          <th>SSC School/College</th>
+          <td>{{emp_edu.SchoolCollegeSSC}}</td>
+        </tr>
+        <tr>
+          <th>Year of Passing in SSC</th>
+          <td>{{emp_edu.YearPassingSSC}}</td>
+        </tr>
+        <tr>
+          <th>Percent in SSC</th>
+          <td>{{emp_edu.PercentageSSC}}</td>
+        </tr>
+        <th>HSC Course Name</th>
+          <td>{{emp_edu.CourseHSC}}</td>
+        </tr>
+        <tr>
+          <th>HSC School/College</th>
+          <td>{{emp_edu.SchoolCollegeHSC}}</td>
+        </tr>
+        <tr>
+          <th>Year of Passing in HSC</th>
+          <td>{{emp_edu.YearPassingHSC}}</td>
+        </tr>
+        <tr>
+          <th>Percent in HSC</th>
+          <td>{{emp_edu.PercentageHSC}}</td>
+        </tr>
+        
+        
+        </table>
+      
+
+        <!-- Pending Requests Card Example -->
+      
+    </div>
+
+    <!-- Content Row -->
+
+    
+    
+
+</div>
+{% endblock %}

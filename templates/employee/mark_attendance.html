@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+
+<div class="flex justify-center items-center h-full">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-[36rem]">
+        <h2 class="text-center text-xl font-bold mb-4">Mark Your Attendance Here ({{ request.user.username }})</h2>
+        <div class="w-full h-72 mb-4 rounded overflow-hidden"> 
+            <video id="video" class="w-full h-full object-cover transform scale-x-[-1]" autoplay></video>
+        </div>
+        <button id="capture" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">Mark Attendance</button>
+        <div id="location-info" class="mt-4 text-center text-gray-700 hidden">
+            <p>Username: <span id="username"></span></p>
+            <p>Location: <span id="location-name"></span></p>
+        </div>
+        <a href="{% url 'dashboard' %}" class="w-full mt-4 bg-gray-500 text-white py-2 rounded hover:bg-gray-600 text-center block">Go Back to Dashboard</a>
+    </div>
+</div>
+
+<script>
+    const video = document.getElementById('video');
+    const captureButton = document.getElementById('capture');
+    const locationInfo = document.getElementById('location-info');
+    const usernameSpan = document.getElementById('username');
+    const locationNameSpan = document.getElementById('location-name');
+
+    // Access the user's camera
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+            video.srcObject = stream;
+            video.play();
+        }).catch(function(err) {
+            console.error("Error accessing camera: ", err);
+            alert("Unable to access camera. Please check permissions.");
+        });
+    }
+
+    // Get geolocation
+    function getLocation() {
+        return new Promise((resolve, reject) => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => resolve({
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude
+                    }),
+                    (error) => reject(error)
+                );
+            } else {
+                reject("Geolocation is not supported by this browser.");
+            }
+        });
+    }
+
+    // Capture image and send to server with geolocation
+    captureButton.addEventListener('click', async function() {
+        const canvas = document.createElement('canvas');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        canvas.getContext('2d').drawImage(video, 0, 0);
+        const imageData = canvas.toDataURL('image/png');
+
+        try {
+            const location = await getLocation();
+            fetch('/mark_attendance/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: `image=${encodeURIComponent(imageData)}&latitude=${location.latitude}&longitude=${location.longitude}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message || "Attendance successfully marked.");
+                    // Display username and location name
+                    usernameSpan.textContent = data.username;
+                    locationNameSpan.textContent = data.location_name;
+                    locationInfo.classList.remove('hidden');
+                } else {
+                    alert(data.error || "Your face is not matched, attendance failed!");
+                }
+            })
+            .catch(err => {
+                console.error("Error: ", err);
+                alert("An error occurred while marking attendance.");
+            });
+        } catch (error) {
+            console.error("Geolocation error: ", error);
+            alert("Unable to get location. Attendance marking failed.");
+        }
+    });
+</script>
+{% endblock content %}

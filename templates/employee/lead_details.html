@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Lead Details for {{ lead.name }}</h2>
+    
+    <div class="card shadow-lg p-4">
+        <form method="post" action="{% url 'lead_details' lead.id %}">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ lead.name }}" readonly>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="email" name="email" value="{{ lead.email }}" readonly>
+            </div>
+
+            <div class="mb-3">
+                <label for="contact_number" class="form-label">Contact Number</label>
+                <input type="text" class="form-control" id="contact_number" name="contact_number" maxlength="10" 
+                       pattern="\d{10}" title="Please enter a valid 10-digit contact number." value="{{ lead.contact_number }}" readonly>
+            </div>
+
+            <div class="mb-3">
+                <label for="city" class="form-label">City</label>
+                <input type="text" class="form-control" id="city" name="city" value="{{ lead.city }}" readonly>
+            </div>
+
+            <div class="mb-3">
+                <label for="state" class="form-label">State</label>
+                <input type="text" class="form-control" id="state" name="state" value="{{ lead.state }}" readonly>
+            </div>
+
+            <div class="mb-3">
+                <label for="source" class="form-label">Source</label>
+                <input type="text" class="form-control" id="source" name="source" value="{{ lead.source }}" readonly>
+            </div>
+
+            <div class="mb-3">
+                <label for="services" class="form-label">Services</label>
+                <input type="text" class="form-control" id="services" name="services" value="{{ lead.services }}" readonly>
+            </div>
+
+            <div class="mb-3">
+                <label for="call_connect_status" class="form-label">Call Connect Status</label>
+                <select class="form-select form-control" id="call_connect_status" name="call_connect_status">
+                    <option value="">--Select Status--</option>
+                    <option value="connected" {% if lead.call_connect_status == 'connected' %}selected{% endif %}>Connected</option>
+                    <option value="not_connected" {% if lead.call_connect_status == 'not_connected' %}selected{% endif %}>Not Connected</option>
+                    <option value="follow_up" {% if lead.call_connect_status == 'follow_up' %}selected{% endif %}>Follow Up</option>
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label for="remarks" class="form-label">Enter Remark</label>
+                <textarea id="remarks" class="form-control" name="remarks" rows="3">{{ lead.remarks }}</textarea>
+            </div>
+
+            <div class="d-flex justify-content-center" style="gap: 40px;">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a href="{% url 'today_leads' %}" class="btn btn-danger">Cancel</a>
+            </div>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert mt-3 {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

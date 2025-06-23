@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="container mt-1">
+    <div class="border rounded p-4 bg-white shadow-sm">  <!-- Added border and background -->
+        <h2 class="mb-4">Add New Lead</h2>
+        <form method="post" action="{% url 'add_lead' %}" class="p-0">  <!-- Removed padding here -->
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" required placeholder="Enter your name">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" required placeholder="Enter your email">
+            </div>
+            <div class="mb-3">
+                <label for="contact_number" class="form-label">Contact Number (10 Digits)</label>
+                <input type="text" class="form-control" id="contact_number" name="contact_number" maxlength="10" pattern="\d{10}" title="Please enter a valid 10-digit contact number." required placeholder="Enter your contact number">
+            </div>
+            <div class="mb-3">
+                <label for="city" class="form-label">City</label>
+                <input type="text" class="form-control" id="city" name="city" required placeholder="Enter your city">
+            </div>
+            <div class="mb-3">
+                <label for="state" class="form-label">State</label>
+                <input type="text" class="form-control" id="state" name="state" required placeholder="Enter your state">
+            </div>
+
+            <!-- Source Dropdown -->
+            <div class="mb-3">
+                <label for="source" class="form-label">Source</label>
+                <select class="form-select form-control" id="source" name="source" required>  <!-- Added form-control for consistency -->
+                    <option value="" disabled selected>Select Source</option>
+                    <option value="instagram">Instagram</option>
+                    <option value="facebook">Facebook</option>
+                    <option value="referred">Referred</option>
+                    <option value="google">Google</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <!-- Services Dropdown -->
+            <div class="mb-3">
+                <label for="services" class="form-label">Services</label>
+                <select class="form-select form-control" id="services" name="services" required>  <!-- Added form-control for consistency -->
+                    <option value="" disabled selected>Select Service</option>
+                    <option value="seo">SEO</option>
+                    <option value="android_development">Android Development</option>
+                    <option value="logo_design">Logo Design</option>
+                    <option value="website">Website</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <!-- Assigned User Dropdown -->
+            <div class="mb-3">
+                <label for="assigned_user" class="form-label">Assign User</label>
+                <select class="form-select form-control" id="assigned_user" name="assigned_user">  <!-- Added form-control for consistency -->
+                    <option value="" disabled selected>Select Employee</option>
+                    {% for employee in users %}
+                        <option value="{{ employee.id }}">{{ employee.admin.first_name }} {{ employee.admin.last_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary w-100 mt-3">Add Lead</button>
+
+            <!-- Messages Display -->
+              <!-- Messages Display -->
+              {% if messages %}
+              {% for message in messages %}
+                  <div class="alert alert-{{ message.tags }} mt-3" role="alert">
+                      {{ message }}
+                  </div>
+              {% endfor %}
+          {% endif %}
+    </div>
+</div>
+
+{% endblock content %}

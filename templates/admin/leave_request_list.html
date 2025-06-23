@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">All Leave Requests</h1>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <form method="GET" action="">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search by Employee Name" name="q" value="{{ request.GET.q }}">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+        <div class="col-12 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <h4 class="card-title">All Leave Requests</h4>
+                    <hr>
+
+                    {% include 'includes/messages.html' %}
+
+                    <!-- Responsive table -->
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>S no.</th>
+                                    <th>Employee</th>
+                                    <th>Reason</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for request in leave_requests %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ request.user.username }}</td>
+                                    <td>{{ request.get_leave_reason_display }}</td>
+                                    <td>{{ request.from_date }} {{ request.from_time }}</td>
+                                    <td>{{ request.to_date }} {{ request.to_time }}</td>
+                                    <td>
+                                        <form method="post" action="{% url 'update_leave_request_status' request.id %}">
+                                            {% csrf_token %}
+                                            <select name="status" onchange="this.form.submit()" class="border-gray-300 rounded-md">
+                                                <option value="pending" {% if request.status == 'pending' %}selected{% endif %}>Pending</option>
+                                                <option value="approved" {% if request.status == 'approved' %}selected{% endif %}>Approved</option>
+                                                <option value="rejected" {% if request.status == 'rejected' %}selected{% endif %}>Rejected</option>
+                                            </select>
+                                        </form>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="6" class="text-center">No leave requests found.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination" style="padding-top: 10px; text-align: center;">
+                        <span class="step-links">
+                            {% if leave_requests.has_previous %}
+                                <a href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">« first</a>
+                                <a href="?page={{ leave_requests.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+                            {% endif %}
+
+                            <span class="current">
+                                Page {{ leave_requests.number }} of {{ leave_requests.paginator.num_pages }}.
+                            </span>
+
+                            {% if leave_requests.has_next %}
+                                <a href="?page={{ leave_requests.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
+                                <a href="?page={{ leave_requests.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">last »</a>
+                            {% endif %}
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

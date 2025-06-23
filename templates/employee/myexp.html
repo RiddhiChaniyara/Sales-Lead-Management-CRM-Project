@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Experiences Details</h1>
+       
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+
+        <!-- Earnings (Monthly) Card Example -->
+       
+        {% if eexp %}
+
+        <!-- Earnings (Monthly) Card Example -->
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <p style="font-size:16px; color:red" align="center">Your Experience details already added. Now you can only edit the record. </p>
+          <tr>
+            <th>Employer1 Name</th>
+            <td>{{eexp.Employer1Name}}</td>
+          </tr>
+          <tr>
+            <th>Employer1 Designation</th>
+            <td>{{eexp.Employer1Designation}}</td>
+          </tr>
+          <tr>
+            <th>Employer1 CTC</th>
+            <td>{{eexp.Employer1CTC}}</td>
+          </tr>
+          <tr>
+            <th>Employer1 WorkDuration</th>
+            <td>{{eexp.Employer1WorkDuration}}</td>
+          </tr>
+          <tr>
+            <th>Employer2 Name</th>
+            <td>{{eexp.Employer2Name}}</td>
+          </tr>
+          <tr>
+            <th>Employer2 Designation</th>
+            <td>{{eexp.Employer2Designation}}</td>
+          </tr>
+          <tr>
+            <th>Employer2 CTC</th>
+            <td>{{eexp.Employer2CTC}}</td>
+          </tr>
+          <tr>
+            <th>Employer2 WorkDuration</th>
+            <td>{{eexp.Employer2WorkDuration}}</td>
+          </tr>
+          <tr>
+            <th>Employer3 Name</th>
+            <td>{{eexp.Employer3Name}}</td>
+          </tr>
+          <tr>
+            <th>Employer3 Designation</th>
+            <td>{{eexp.Employer3Designation}}</td>
+          </tr>
+          <tr>
+            <th>Employer3 CTC</th>
+            <td>{{eexp.Employer3CTC}}</td>
+          </tr>
+          <tr>
+            <th>Employer3 WorkDuration</th>
+            <td>{{eexp.Employer3WorkDuration}}</td>
+          </tr>
+        
+          
+          
+          </table>
+      
+          {% else %}
+      
+      
+
+        <!-- Pending Requests Card Example -->
+        <div class="col-xl-12 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <h4 class="card-title">Experiences Details</h4>
+         <hr>
+        
+           
+            
+
+<form class="user" method="post" action="">
+  {% include 'includes/messages.html' %}
+  {% csrf_token %}
+ 
+  <div class="row">
+    <div class="col-4 mb-3">Employer1 Name</div>
+       <div class="col-8 mb-3">   <input type="text" class="form-control form-control-user" id="Employer1Name" name="Employer1Name" aria-describedby="emailHelp" value=""></div>
+        </div>  
+        <div class="row">
+          <div class="col-4 mb-3">Employer1 Designation </div>
+         <div class="col-8 mb-3">  <input type="text" class="form-control form-control-user" id="Employer1Designation" name="Employer1Designation" aria-describedby="emailHelp" value=""></div>  
+         </div>
+
+
+
+        <div class="row">
+        <div class="col-4 mb-3">Employer1 CTC </div>
+        <div class="col-8 mb-3">
+          <input type="text" class="form-control form-control-user" id="Employer1CTC" name="Employer1CTC" aria-describedby="emailHelp" value=""></div>
+        </div>
+
+        <div class="row">
+          <div class="col-4 mb-3">Employer1 WorkDuration</div>
+         <div class="col-8 mb-3">
+          <input type="text" class="form-control form-control-user" id="Employer1WorkDuration" name="Employer1WorkDuration" aria-describedby="emailHelp" value="">
+        </div></div>
+        <div class="row">
+    <div class="col-4 mb-3">Employer2 Name</div>
+       <div class="col-8 mb-3">   <input type="text" class="form-control form-control-user" id="Employer2Name" name="Employer2Name" aria-describedby="emailHelp" value=""></div>
+        </div>  
+        <div class="row">
+          <div class="col-4 mb-3">Employer2 Designation </div>
+         <div class="col-8 mb-3">  <input type="text" class="form-control form-control-user" id="Employer2Designation" name="Employer2Designation" aria-describedby="emailHelp" value=""></div>  
+         </div>
+
+
+
+        <div class="row">
+        <div class="col-4 mb-3">Employer2 CTC </div>
+        <div class="col-8 mb-3">
+          <input type="text" class="form-control form-control-user" id="Employer2CTC" name="Employer2CTC" aria-describedby="emailHelp" value=""></div>
+        </div>
+
+        <div class="row">
+          <div class="col-4 mb-3">Employer2 WorkDuration</div>
+         <div class="col-8 mb-3">
+          <input type="text" class="form-control form-control-user" id="Employer2WorkDuration" name="Employer2WorkDuration" aria-describedby="emailHelp" value="">
+        </div></div>
+        <div class="row">
+    <div class="col-4 mb-3">Employer3 Name</div>
+       <div class="col-8 mb-3">   <input type="text" class="form-control form-control-user" id="Employer3Name" name="Employer3Name" aria-describedby="emailHelp" value=""></div>
+        </div>  
+        <div class="row">
+          <div class="col-4 mb-3">Employer3 Designation </div>
+         <div class="col-8 mb-3">  <input type="text" class="form-control form-control-user" id="Employer3Designation" name="Employer3Designation" aria-describedby="emailHelp" value=""></div>  
+         </div>
+
+
+
+        <div class="row">
+        <div class="col-4 mb-3">Employer3 CTC </div>
+        <div class="col-8 mb-3">
+          <input type="text" class="form-control form-control-user" id="Employer3CTC" name="Employer3CTC" aria-describedby="emailHelp" value=""></div>
+        </div>
+
+        <div class="row">
+          <div class="col-4 mb-3">Employer3 WorkDuration</div>
+         <div class="col-8 mb-3">
+          <input type="text" class="form-control form-control-user" id="Employer3WorkDuration" name="Employer3WorkDuration" aria-describedby="emailHelp" value="">
+        </div></div>
+
+        <div class="row" style="margin-top:4%">
+          <div class="col-4"></div>
+          <div class="col-4">
+          <input type="submit" name="submit"  value="submit" class="btn btn-primary btn-user btn-block">
+        </div>
+        </div>
+     
+     </form>
+     
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <!-- Content Row -->
+
+    
+
+
+</div>
+{% endblock %}

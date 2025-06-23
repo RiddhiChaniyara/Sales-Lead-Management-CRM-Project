@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .leave-requests-wrapper {
+            font-family: 'Inter', sans-serif !important;
+            background: #f5f8fa;
+            padding: 1.5rem;
+            min-height: calc(100vh - 60px);
+        }
+        .container-fluid { padding: 0; }
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        h2 { font-size: 1.5rem; font-weight: 700; color: #1a202c; }
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.25rem;
+            color: white;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-left: 0.5rem;
+        }
+        .btn-primary { background: #007bff; }
+        .btn-primary:hover { background: #0056b3; }
+        .btn-secondary { background: #6c757d; }
+        .btn-secondary:hover { background: #5a6268; }
+        .btn-refresh { background: #28a745; }
+        .btn-refresh:hover { background: #218838; }
+        .btn-danger { background: #dc3545; }
+        .btn-danger:hover { background: #c82333; }
+        .table-container {
+            background: white;
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+        table { width: 100%; border-collapse: collapse; }
+        thead { background: #f9fafb; }
+        th {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #a0aec0;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        td { padding: 1rem; color: #2d3748; border-top: 1px solid #e2e8f0; }
+        .status-pending { color: #f4a261; font-weight: 500; }
+        .status-approved { color: #2ecc71; font-weight: 500; }
+        .status-rejected { color: #e76f51; font-weight: 500; }
+        .empty-message { text-align: center; padding: 1rem; color: #a0aec0; }
+        #content-wrapper .card-footer {
+            background: #f8f9fc;
+            font-family: 'Nunito', sans-serif !important;
+        }
+    </style>
+
+    <div class="container-fluid">
+        <div class="leave-requests-wrapper">
+            <div class="header-section">
+                <h2>My Leave Requests</h2>
+                <div>
+                    <a href="{% url 'dashboard' %}" class="btn btn-secondary">Go Back</a>
+                    <button onclick="location.reload()" class="btn btn-refresh">Refresh</button>
+                    <a href="{% url 'submit_leave_request' %}" class="btn btn-primary">New Leave Request</a>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Reason</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for request in leave_requests %}
+                        <tr>
+                            <td>{{ request.get_leave_reason_display }}</td>
+                            <td>{{ request.from_date }} {{ request.from_time }}</td>
+                            <td>{{ request.to_date }} {{ request.to_time }}</td>
+                            <td>
+                                <span class="
+                                    {% if request.status == 'pending' %}status-pending
+                                    {% elif request.status == 'approved' %}status-approved
+                                    {% else %}status-rejected
+                                    {% endif %}"
+                                >
+                                    {{ request.get_status_display }}
+                                </span>
+                            </td>
+                            <td>
+                                {% if request.status == 'pending' %}
+                                    <a href="{% url 'edit_leave_request' request.id %}" class="btn btn-primary">Edit</a>
+                                    <a href="{% url 'delete_leave_request' request.id %}" class="btn btn-danger">Delete</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5" class="empty-message">No leave requests found.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

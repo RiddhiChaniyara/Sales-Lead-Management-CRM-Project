@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+    <title>Our Services</title>
+
+    <!-- Font Awesome for icons (already included in SB Admin 2) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Sf3ADSrO2pZFXDYbEafM8CrHkmAGQXiCW6al0L14Aq6YTzXLBAVxIqFKBpdqIp9SZJ5Eqtt+8gI2icO/ZUXx2w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* Use project CSS variables and font settings */
+        body {
+            background-color: var(--light); /* Using your project's light variable (#f8f9fc) */
+            color: var(--gray); /* Using your project's gray variable (#858796) */
+        }
+
+        h1 {
+            color: var(--primary); /* Using your project's primary variable (#4e73df) */
+        }
+
+        .service-card {
+            background-color: var(--white); /* Using your project's white variable (#fff) */
+            border: 1px solid var(--gray); /* Using your project's gray variable (#858796) for border */
+            border-radius: 0.35rem; /* SB Admin 2 card radius */
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15); /* Subtle shadow */
+            overflow: hidden;
+            transition: box-shadow 0.2s ease-in-out; /* Smooth shadow transition for hover */
+            margin-bottom: 1.25rem; /*Adding margin bottom for spacing between cards vertically*/
+        }
+
+        .service-card:hover {
+            box-shadow: 0 0.25rem 2rem 0 rgba(58, 59, 69, 0.2); /* Slightly stronger shadow on hover */
+        }
+
+        .service-card img {
+            height: 200px;
+            object-fit: cover;
+            width: 100%;
+            transition: opacity 0.2s ease-in-out; /* Smooth opacity transition for hover */
+        }
+
+        .service-card:hover img {
+            opacity: 0.9; /* Subtle fade on hover for visual feedback */
+        }
+
+        .service-card .card-body {
+            padding: 1.25rem; /* Consistent padding with SB Admin 2 */
+        }
+
+        .service-card h2 {
+            color: var(--dark); /* Using your project's dark variable (#5a5c69) */
+            margin-bottom: 0.75rem;
+        }
+
+        .service-card p {
+            color: var(--gray); /* Using your project's gray variable (#858796) */
+            line-height: 1.5;
+        }
+
+        .btn-read-more {
+            background-color: var(--primary); /* Using your project's primary variable (#4e73df) */
+            color: var(--white); /* Using your project's white variable (#fff) */
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.35rem;
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+        }
+
+        .btn-read-more:hover {
+            background-color: #2e59d9; /* Slightly darker primary color on hover */
+            color: var(--white); /* Using your project's white variable (#fff) */
+            transform: scale(1.05); /* Slight scale effect on hover for better interactivity */
+            text-decoration: none;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .service-card {
+                margin-bottom: 1.25rem;
+            }
+
+            .service-card img {
+                height: 150px; /* Smaller images on mobile */
+            }
+
+            h1 {
+                margin-bottom: 1rem; /* Adjust heading margin on mobile for better spacing */
+            }
+        }
+    </style>
+
+    <div class="container-fluid py-5 px-4">
+        <h1 class="text-center mb-4">Our Services</h1>
+        <div class="row row-cols-1 row-cols-md-3 g-4"> <!-- g-4 for 24px gap between cards -->
+            <div class="col">
+                <div class="service-card">
+                    <img src="https://diziglobalsolution.com/wp-content/uploads/2023/11/pngtree-hand-drawn-business-seo-computer-work-illustration-png-image_2194736-removebg-preview.png" alt="SEO" class="card-img-top">
+                    <div class="card-body">
+                        <h2 class="card-title">SEO</h2>
+                        <p class="card-text">Boost your website's visibility and attract more organic traffic with our expert SEO services.</p>
+                        <a href="{% url 'seo' %}" class="btn btn-read-more">Read More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="service-card">
+                    <img src="https://cdn.pixabay.com/photo/2016/11/19/14/00/code-1839406_1280.jpg" alt="Website Development" class="card-img-top">
+                    <div class="card-body">
+                        <h2 class="card-title">Website Development</h2>
+                        <p class="card-text">Create a stunning and responsive website tailored to your business needs.</p>
+                        <a href="{% url 'website_development' %}" class="btn btn-read-more">Read More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="service-card">
+                    <img src="https://www.apptunix.com/blog/wp-content/uploads/sites/3/2016/12/android.jpg" alt="Android Development" class="card-img-top">
+                    <div class="card-body">
+                        <h2 class="card-title">Android Development</h2>
+                        <p class="card-text">Build high-quality, user-friendly Android apps for your target audience.</p>
+                        <a href="{% url 'android_development' %}" class="btn btn-read-more">Read More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="service-card">
+                    <img src="https://vinyldest.com/wp-content/uploads/2019/07/services-mobile-design.jpg" alt="Logo Design" class="card-img-top">
+                    <div class="card-body">
+                        <h2 class="card-title">Logo Design</h2>
+                        <p class="card-text">Craft a memorable brand identity with our creative logo design services.</p>
+                        <a href="{% url 'logo_design' %}" class="btn btn-read-more">Read More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="service-card">
+                    <img src="https://cdn.pixabay.com/photo/2015/01/08/18/25/desk-593327_1280.jpg" alt="Content Writing" class="card-img-top">
+                    <div class="card-body">
+                        <h2 class="card-title">Content Writing</h2>
+                        <p class="card-text">Engage your audience with compelling and SEO-optimized content.</p>
+                        <a href="{% url 'content_writing' %}" class="btn btn-read-more">Read More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="service-card">
+                    <img src="https://5.imimg.com/data5/SELLER/Default/2023/5/311336264/BN/UJ/SM/2893921/single-domain-hosting-services-500x500.jpeg" alt="Domain & Hosting" class="card-img-top">
+                    <div class="card-body">
+                        <h2 class="card-title">Domain & Hosting</h2>
+                        <p class="card-text">Secure your online presence with reliable domain registration and hosting solutions.</p>
+                        <a href="{% url 'domain_hosting' %}" class="btn btn-read-more">Read More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="service-card">
+                    <img src="https://blogassets.leverageedu.com/blog/wp-content/uploads/2020/07/30182024/UX-UI-Design.jpg" alt="UI/UX Design" class="card-img-top">
+                    <div class="card-body">
+                        <h2 class="card-title">UI/UX Design</h2>
+                        <p class="card-text">Create intuitive and visually appealing user interfaces for your digital products.</p>
+                        <a href="{% url 'ui_ux_design' %}" class="btn btn-read-more">Read More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="service-card">
+                    <img src="https://cdn.pixabay.com/photo/2016/11/19/15/32/laptop-1839876_1280.jpg" alt="ERP Development" class="card-img-top">
+                    <div class="card-body">
+                        <h2 class="card-title">ERP Development</h2>
+                        <p class="card-text">Streamline your business operations with custom ERP software solutions.</p>
+                        <a href="{% url 'erp_development' %}" class="btn btn-read-more">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (SB Admin 2 uses Bootstrap 4) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+{% endblock %}
